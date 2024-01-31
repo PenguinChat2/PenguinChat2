@@ -3,7 +3,6 @@ package com.penguinchat2.paper.config.configs;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
-import org.spongepowered.configurate.objectmapping.meta.Comment;
 import org.spongepowered.configurate.objectmapping.meta.Setting;
 
 import java.util.List;

@@ -9,7 +9,6 @@ import com.penguinchat2.paper.commands.PaperCommandRegistrar;
 import com.penguinchat2.paper.config.PaperConfigManager;
 import com.penguinchat2.paper.config.configs.MessagesConfig;
 import com.penguinchat2.paper.util.PaperLogger;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
