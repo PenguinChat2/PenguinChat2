@@ -1,0 +1,54 @@
+[versions]
+dotenv-kotlin = "6.4.1"
+cloud = "1.8.4"
+paper-api = "1.20.1-R0.1-SNAPSHOT"
+luckperms-api = "5.4"
+configurate-yaml = "4.1.2"
+adventure = "4.16.0-SNAPSHOT"
+adventure-platform = "4.1.1-SNAPSHOT"
+guava = "31.1-jre"
+log4j-slf4j-impl = "2.20.0"
+shadow = "8.1.1"
+blossom = "1.2.0"
+indra = "3.1.3"
+lombok = "8.4"
+
+[libraries]
+dotenv-kotlin = { group = "io.github.cdimascio", name = "dotenv-kotlin", version.ref = "dotenv-kotlin" }
+cloud-core = { group = "cloud.commandframework", name = "cloud-core", version.ref = "cloud" }
+cloud-paper = { group = "cloud.commandframework", name = "cloud-paper", version.ref = "cloud" }
+cloud-minecraft-extras = { group = "cloud.commandframework", name = "cloud-minecraft-extras", version.ref = "cloud" }
+paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper-api" }
+luckperms-api = { group = "net.luckperms", name = "api", version.ref = "luckperms-api" }
+configurate-yaml = { group = "org.spongepowered", name = "configurate-yaml", version.ref = "configurate-yaml" }
+adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventure" }
+adventure-text-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "adventure" }
+adventure-platform-bukkit = { group = "net.kyori", name = "adventure-platform-bukkit", version.ref = "adventure-platform" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+log4j-slf4j-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version.ref = "log4j-slf4j-impl" }
+shadow = { group = "com.github.johnrengelman", name = "shadow", version.ref = "shadow" }
+
+[bundles]
+cloud-paper = [
+  "cloud-paper",
+  "cloud-minecraft-extras"
+]
+cloud-core = [
+  "cloud-core",
+  "cloud-minecraft-extras"
+]
+adventure-core = [
+  "adventure-api",
+  "adventure-text-minimessage"
+]
+adventure-bukkit = [
+  "adventure-api",
+  "adventure-text-minimessage",
+  "adventure-platform-bukkit"
+]
+
+[plugins]
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
+indra-git = { id = "net.kyori.indra.git", version.ref = "indra" }
+lombok = { id = "io.freefair.lombok", version.ref = "lombok" }

@@ -1,0 +1,74 @@
+on:
+  push:
+    branches:
+      - "*"
+    paths-ignore:
+      - '.github/ISSUE_TEMPLATE/*.yml'
+      - '.gitignore'
+      - 'CONTRIBUTING.md'
+      - 'LICENSE'
+      - 'README.md'
+
+jobs:
+  ci:
+    permissions:
+      contents: write
+    name: CI
+    runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.release.outputs.releaseID }}
+
+    steps:
+      # See https://github.com/actions/checkout/commits
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+        submodules: recursive
+
+    - name: Validate Gradle Wrapper
+      # See https://github.com/gradle/wrapper-validation-action/commits
+      uses: gradle/wrapper-validation-action@1ff5a18cc396177ebd27c4250f7132e72af93462
+
+      # See https://github.com/actions/setup-java/commits
+    - uses: actions/setup-java@7a445ee88d4e23b52c33fdc7601e40278616c7f8
+      with:
+        distribution: 'microsoft'
+        java-version: '17'
+
+    - name: Build
+      # See https://github.com/gradle/gradle-build-action/commits
+      uses: gradle/gradle-build-action@d4bd442194a6478e8ac205108cae29e76bf9b787
+      with:
+        arguments: build
+        gradle-home-cache-cleanup: true
+
+    - name: Archive Artifacts
+      # See https://github.com/actions/upload-artifact/commits
+      uses: actions/upload-artifact@d00351bf698398c17253d21cf8f90e57a344e14b
+      if: success()
+      with:
+        name: PenguinChat2
+        path: build/libs/PenguinChat2.jar
+        if-no-files-found: error
+
+    - name: Make release
+      id: release
+      # See https://github.com/Kas-tle/base-release-action/commits
+      uses: Kas-tle/base-release-action@501addec72a0a33760b39bc5a90d3742b63ca44e
+      with:
+        files: |
+          build/libs/PenguinChat2.jar
+        appID: ${{ secrets.RELEASE_APP_ID }}
+        appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
+
+    upload-logs:
+        permissions:
+          contents: write
+        name: Upload Logs
+        runs-on: ubuntu-latest
+        needs: ci
+        steps:
+            # See https://github.com/Kas-tle/release-build-log-action/commits
+          - uses: Kas-tle/release-build-log-action@1b57448eaf9476e6e05450e4ea240449eac2c0d2
+            with:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              releaseID: ${{ needs.ci.outputs.release_id }}

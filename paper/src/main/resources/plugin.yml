@@ -1,0 +1,6 @@
+name: ${name}
+version: ${version}
+website: ${url}
+authors: [${authors}]
+main: com.penguinchat2.paper.PenguinChat2Paper
+api-version: '${paperApiVersion}'
