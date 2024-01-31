@@ -60,15 +60,15 @@ jobs:
         appID: ${{ secrets.RELEASE_APP_ID }}
         appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
 
-    upload-logs:
-        permissions:
-          contents: write
-        name: Upload Logs
-        runs-on: ubuntu-latest
-        needs: ci
-        steps:
-            # See https://github.com/Kas-tle/release-build-log-action/commits
-          - uses: Kas-tle/release-build-log-action@1b57448eaf9476e6e05450e4ea240449eac2c0d2
-            with:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              releaseID: ${{ needs.ci.outputs.release_id }}
+  upload-logs:
+    permissions:
+      contents: write
+    name: Upload Logs
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+        # See https://github.com/Kas-tle/release-build-log-action/commits
+      - uses: Kas-tle/release-build-log-action@1b57448eaf9476e6e05450e4ea240449eac2c0d2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          releaseID: ${{ needs.ci.outputs.release_id }}
