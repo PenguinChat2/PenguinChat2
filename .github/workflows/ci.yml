@@ -8,6 +8,8 @@ on:
       - 'CONTRIBUTING.md'
       - 'LICENSE'
       - 'README.md'
+      - '.devcontainer/**'
+      - '.vscode/**'
 
 jobs:
   ci:
